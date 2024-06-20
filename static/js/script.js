@@ -6,9 +6,18 @@ $(document).ready(function() {
     noUiSlider.create(hueSlider, {
         start: [0, 179],
         connect: true,
+        step: 1, // Ensure the slider moves in whole number increments
         range: {
             'min': 0,
             'max': 179
+        },
+        format: {
+            to: function(value) {
+                return Math.round(value);
+            },
+            from: function(value) {
+                return Math.round(value);
+            }
         }
     });
     hueSlider.noUiSlider.on('update', function(values, handle) {
@@ -21,9 +30,18 @@ $(document).ready(function() {
     noUiSlider.create(saturationSlider, {
         start: [0, 255],
         connect: true,
+        step: 1, // Ensure the slider moves in whole number increments
         range: {
             'min': 0,
             'max': 255
+        },
+        format: {
+            to: function(value) {
+                return Math.round(value);
+            },
+            from: function(value) {
+                return Math.round(value);
+            }
         }
     });
     saturationSlider.noUiSlider.on('update', function(values, handle) {
@@ -36,9 +54,18 @@ $(document).ready(function() {
     noUiSlider.create(valueSlider, {
         start: [0, 255],
         connect: true,
+        step: 1, // Ensure the slider moves in whole number increments
         range: {
             'min': 0,
             'max': 255
+        },
+        format: {
+            to: function(value) {
+                return Math.round(value);
+            },
+            from: function(value) {
+                return Math.round(value);
+            }
         }
     });
     valueSlider.noUiSlider.on('update', function(values, handle) {
