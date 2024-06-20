@@ -99,7 +99,7 @@ hsv-range-finder/
     - View the results:
         The original image, masked image, and mask image will be displayed on the right side of the page.
 
-Dependencies
+## Dependencies
 
     - Flask
     - OpenCV (cv2)
@@ -119,3 +119,6 @@ Dependencies
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Note
+This application is developed entirely by chatGPT within an hour, with prompt and test feedback from human, but no code
+written by human.
