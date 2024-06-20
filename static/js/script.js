@@ -1,6 +1,51 @@
 $(document).ready(function() {
     let image_id = null;
 
+    // Initialize noUiSlider for Hue
+    let hueSlider = document.getElementById('hue-range');
+    noUiSlider.create(hueSlider, {
+        start: [0, 179],
+        connect: true,
+        range: {
+            'min': 0,
+            'max': 179
+        }
+    });
+    hueSlider.noUiSlider.on('update', function(values, handle) {
+        $('#hue-value').text(`Hue: ${values[0]} - ${values[1]}`);
+        processImage();
+    });
+
+    // Initialize noUiSlider for Saturation
+    let saturationSlider = document.getElementById('saturation-range');
+    noUiSlider.create(saturationSlider, {
+        start: [0, 255],
+        connect: true,
+        range: {
+            'min': 0,
+            'max': 255
+        }
+    });
+    saturationSlider.noUiSlider.on('update', function(values, handle) {
+        $('#saturation-value').text(`Saturation: ${values[0]} - ${values[1]}`);
+        processImage();
+    });
+
+    // Initialize noUiSlider for Value
+    let valueSlider = document.getElementById('value-range');
+    noUiSlider.create(valueSlider, {
+        start: [0, 255],
+        connect: true,
+        range: {
+            'min': 0,
+            'max': 255
+        }
+    });
+    valueSlider.noUiSlider.on('update', function(values, handle) {
+        $('#value-value').text(`Value: ${values[0]} - ${values[1]}`);
+        processImage();
+    });
+
     $('#upload-form').on('submit', function(e) {
         e.preventDefault();
         let formData = new FormData();
@@ -24,14 +69,18 @@ $(document).ready(function() {
     function processImage() {
         if (!image_id) return;
 
+        let hue_values = hueSlider.noUiSlider.get();
+        let saturation_values = saturationSlider.noUiSlider.get();
+        let value_values = valueSlider.noUiSlider.get();
+
         let data = {
             image_id: image_id,
-            hue_min: $('#hue-min').val(),
-            hue_max: $('#hue-max').val(),
-            saturation_min: $('#saturation-min').val(),
-            saturation_max: $('#saturation-max').val(),
-            value_min: $('#value-min').val(),
-            value_max: $('#value-max').val(),
+            hue_min: Math.round(hue_values[0]),
+            hue_max: Math.round(hue_values[1]),
+            saturation_min: Math.round(saturation_values[0]),
+            saturation_max: Math.round(saturation_values[1]),
+            value_min: Math.round(value_values[0]),
+            value_max: Math.round(value_values[1]),
             dilate: $('#dilate').is(':checked'),
             dilate_number: $('#dilate-number').val()
         };
@@ -50,7 +99,6 @@ $(document).ready(function() {
         });
     }
 
-    $('#hue-min, #hue-max, #saturation-min, #saturation-max, #value-min, #value-max').on('input', processImage);
     $('#dilate').on('change', function() {
         if ($(this).is(':checked')) {
             $('#dilate-options').show();
@@ -59,5 +107,9 @@ $(document).ready(function() {
         }
         processImage();
     });
-    $('#dilate-number').on('input', processImage);
+
+    $('#dilate-number').on('input', function() {
+        $('#dilate-number-value').text($(this).val());
+        processImage();
+    });
 });
