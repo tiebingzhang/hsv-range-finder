@@ -119,7 +119,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                $('#masked-image').attr('src', response.masked_image_url + '?' + new Date().getTime());
+                //$('#masked-image').attr('src', response.masked_image_url + '?' + new Date().getTime());
                 $('#mask-image').attr('src', response.mask_image_url + '?' + new Date().getTime()); // Add mask image for debugging
                 console.log('Masked image URL:', response.masked_image_url + '?' + new Date().getTime());
                 console.log('Mask image URL:', response.mask_image_url + '?' + new Date().getTime());
