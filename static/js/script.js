@@ -19,8 +19,9 @@ $(document).ready(function() {
         });
     });
 
-    $('#process-form').on('submit', function(e) {
-        e.preventDefault();
+    function processImage() {
+        if (!image_id) return;
+
         let data = {
             image_id: image_id,
             hue_min: $('#hue-min').val(),
@@ -29,7 +30,8 @@ $(document).ready(function() {
             saturation_max: $('#saturation-max').val(),
             value_min: $('#value-min').val(),
             value_max: $('#value-max').val(),
-            dilate: $('#dilate').is(':checked')
+            dilate: $('#dilate').is(':checked'),
+            dilate_number: $('#dilate-number').val()
         };
 
         $.ajax({
@@ -41,5 +43,16 @@ $(document).ready(function() {
                 $('#masked-image').attr('src', response.masked_image_url);
             }
         });
+    }
+
+    $('#hue-min, #hue-max, #saturation-min, #saturation-max, #value-min, #value-max').on('input', processImage);
+    $('#dilate').on('change', function() {
+        if ($(this).is(':checked')) {
+            $('#dilate-options').show();
+        } else {
+            $('#dilate-options').hide();
+        }
+        processImage();
     });
+    $('#dilate-number').on('input', processImage);
 });

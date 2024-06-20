@@ -3,7 +3,7 @@ import os
 import cv2
 import uuid
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -34,6 +34,7 @@ def process_image():
     value_min = int(data['value_min'])
     value_max = int(data['value_max'])
     dilate = data['dilate']
+    dilate_number = int(data['dilate_number'])
 
     filepath = os.path.join(UPLOAD_FOLDER, f'{image_id}.png')
     if not os.path.exists(filepath):
@@ -45,7 +46,8 @@ def process_image():
     
     if dilate:
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        mask = cv2.dilate(mask, kernel)
+        for _ in range(dilate_number):
+            mask = cv2.dilate(mask, kernel)
 
     result = cv2.bitwise_and(image, image, mask=mask)
     processed_filepath = os.path.join(PROCESSED_FOLDER, f'{image_id}.png')

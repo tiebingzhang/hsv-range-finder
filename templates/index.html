@@ -18,7 +18,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
-                <form id="process-form" class="mt-3">
+                <div class="mt-3">
                     <div class="form-group">
                         <label for="hue-range">Hue Range</label>
                         <input type="range" class="form-control-range" id="hue-min" min="0" max="179">
@@ -38,8 +38,11 @@
                         <input type="checkbox" id="dilate">
                         <label for="dilate">Dilate</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Process</button>
-                </form>
+                    <div class="form-group" id="dilate-options" style="display: none;">
+                        <label for="dilate-number">Number of Dilations</label>
+                        <input type="range" class="form-control-range" id="dilate-number" min="1" max="10" value="1">
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <h3>Original Image</h3>
