@@ -86,18 +86,18 @@ hsv-range-finder/
 
 ## Usage
 
-    - Upload an image:
-        Click on the file input to select an image from your computer.
+- Upload an image:
+  - Click on the file input to select an image from your computer.
 
-    - Adjust HSV ranges:
-        Use the sliders to adjust the Hue, Saturation, and Value ranges.
+- Adjust HSV ranges:
+  - Use the sliders to adjust the Hue, Saturation, and Value ranges.
 
-    - Apply dilation (optional):
-        Check the "Dilate" checkbox to enable dilation.
-        Adjust the number of dilation iterations using the slider.
+- Apply dilation (optional):
+  - Check the "Dilate" checkbox to enable dilation.
+  - Adjust the number of dilation iterations using the slider.
 
-    - View the results:
-        The original image, masked image, and mask image will be displayed on the right side of the page.
+- View the results:
+  - The original image, masked image, and mask image will be displayed on the right side of the page.
 
 ## Dependencies
 
