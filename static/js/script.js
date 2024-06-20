@@ -73,24 +73,25 @@ $(document).ready(function() {
         processImage();
     });
 
-    $('#upload-form').on('submit', function(e) {
-        e.preventDefault();
-        let formData = new FormData();
-        formData.append('file', $('#image')[0].files[0]);
+    $('#image').on('change', function() {
+        if (this.files && this.files[0]) {
+            let formData = new FormData();
+            formData.append('file', this.files[0]);
 
-        $.ajax({
-            url: '/upload',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                image_id = response.image_id;
-                $('#original-image').attr('src', '/uploads/' + image_id + '.png?' + new Date().getTime());
-                console.log('Original image URL:', '/uploads/' + image_id + '.png?' + new Date().getTime());
-                processImage(); // Automatically process the image after upload
-            }
-        });
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    image_id = response.image_id;
+                    $('#original-image').attr('src', '/uploads/' + image_id + '.png?' + new Date().getTime());
+                    console.log('Original image URL:', '/uploads/' + image_id + '.png?' + new Date().getTime());
+                    processImage(); // Automatically process the image after upload
+                }
+            });
+        }
     });
 
     function processImage() {
