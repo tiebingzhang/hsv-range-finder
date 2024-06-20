@@ -14,7 +14,9 @@ $(document).ready(function() {
             processData: false,
             success: function(response) {
                 image_id = response.image_id;
-                $('#original-image').attr('src', '/uploads/' + image_id + '.png');
+                $('#original-image').attr('src', '/uploads/' + image_id + '.png?' + new Date().getTime());
+                console.log('Original image URL:', '/uploads/' + image_id + '.png?' + new Date().getTime());
+                processImage(); // Automatically process the image after upload
             }
         });
     });
@@ -40,7 +42,10 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                $('#masked-image').attr('src', response.masked_image_url);
+                $('#masked-image').attr('src', response.masked_image_url + '?' + new Date().getTime());
+                $('#mask-image').attr('src', response.mask_image_url + '?' + new Date().getTime()); // Add mask image for debugging
+                console.log('Masked image URL:', response.masked_image_url + '?' + new Date().getTime());
+                console.log('Mask image URL:', response.mask_image_url + '?' + new Date().getTime());
             }
         });
     }
